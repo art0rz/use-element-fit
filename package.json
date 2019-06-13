@@ -2,8 +2,8 @@
   "name": "use-element-fit",
   "version": "0.0.1",
   "description": "use-element-fit",
-  "main": "dist/umd/index.js",
-  "types": "dist/umd/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "rollup -c",
     "test:unit": "karma start",
