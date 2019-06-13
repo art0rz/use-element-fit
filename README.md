@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/art0rz/use-element-fit.svg?branch=master)](https://travis-ci.com/art0rz/use-element-fit)
+
 # useElementFit
 
 `useElementFit` is a React hook that allows you to measure and element's based on certain restraints, similar to `object-fit` in CSS.
