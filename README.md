@@ -8,14 +8,19 @@
 
 ```js
 import React from 'react';
-import useElementFit from 'use-element-fit';
+import { useElementFit, ScaleMode } from 'use-element-fit';
 
 const App = () => {
-  const {ref, width, height} = useObjectFit(0.5, 1); // half the width and the full height of parent element
+  const {ref, width, height} = useElementFit(0.5, 1, ScaleMode.COVER); // half the width and the full height of parent element
 
   return (
     <div ref={ref}>
-      Size: {width}x{height}
+      <div style={{
+        width: `${width}px`,
+        height: `${height}px`,
+      }}>
+        Size: {width}x{height}
+      </div>
     </div>
   );
 };
