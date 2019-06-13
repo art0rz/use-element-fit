@@ -1,9 +1,17 @@
 language: node_js
 cache: yarn
 node_js:
-  - "8"
+  - '8'
 
 script:
   - yarn lint
   - yarn test
   - yarn build
+
+deploy:
+  - provider: releases
+    skip_cleanup: true
+    local_dir: dist/*
+    api_key: $GITHUB_TOKEN
+    on:
+      tags: true
