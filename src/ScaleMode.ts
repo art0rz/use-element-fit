@@ -1,7 +1,7 @@
 enum ScaleMode {
-  CONTAIN,
-  COVER,
-  ALIGN_ONLY,
+  CONTAIN = 'contain',
+  COVER = 'cover',
+  ALIGN_ONLY = 'align-only',
 }
 
 export default ScaleMode;
