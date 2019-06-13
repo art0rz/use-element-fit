@@ -5,8 +5,8 @@ import ScaleMode from './ScaleMode';
 const resize = (
   elementWidth: number,
   elementHeight: number,
-  containerHeight: number,
   containerWidth: number,
+  containerHeight: number,
   scaleMode: ScaleMode,
   alignmentX: number = 0.5,
   alignmentY: number = 0.5,
@@ -23,7 +23,6 @@ const resize = (
   if (scaleMode === ScaleMode.CONTAIN || scaleMode === ScaleMode.COVER) {
     boundRatioX = containerWidth / elementWidth;
     boundRatioY = containerHeight / elementHeight;
-    scale = 1;
   }
 
   // get scale for bounds container
@@ -108,22 +107,23 @@ const useElementFit = (
       maxHeight,
     );
 
-    if (newWidth !== fitWidth) {
-      setFitWidth(newWidth);
-    }
-
-    if (fitHeight !== newHeight) {
-      setFitHeight(newHeight);
-    }
-
-    if (x !== fitX) {
-      setFitX(x);
-    }
-
-    if (y !== fitY) {
-      setFitY(y);
-    }
-  }, [containerWidth, containerHeight]);
+    setFitWidth(newWidth);
+    setFitHeight(newHeight);
+    setFitX(x);
+    setFitY(y);
+  }, [
+    containerWidth,
+    containerHeight,
+    width,
+    height,
+    containerWidth,
+    containerHeight,
+    scaleMode,
+    alignmentX,
+    alignmentY,
+    maxWidth,
+    maxHeight,
+  ]);
 
   return {
     ref,
