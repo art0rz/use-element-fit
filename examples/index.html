@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style type="text/css">
+      .fit-container {
+        width: 200px;
+        height: 200px;
+        border: 1px solid #dadada;
+        overflow: hidden;
+        position: relative;
+        resize: both;
+      }
+
+      .fit-child {
+        border: 1px solid #dadada;
+        position: absolute;
+        background-image: url(https://picsum.photos/id/985/1000/500);
+        background-size: 100% 100%;
+        pointer-events: none;
+      }
+
+      .fit-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #ffffff;
+        padding: 5px;
+        text-align: center;
+      }
+
+      .handle {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #ffffff url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjgyNkY5MTY0OEVCRDExRTk5NEI2OTc2QURBMTM1MkIwIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjgyNkY5MTY1OEVCRDExRTk5NEI2OTc2QURBMTM1MkIwIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6ODI2RjkxNjI4RUJEMTFFOTk0QjY5NzZBREExMzUyQjAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6ODI2RjkxNjM4RUJEMTFFOTk0QjY5NzZBREExMzUyQjAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7kTDyjAAAAf0lEQVR42qyTQQ7AIAgEZeP/v7xNTQ+GSlmsHPQCExnQSLY0zNhIy9IggeZ7G+YBCRAySAD2EDY7OuasEKg4yVrGNmhRh18gB7xPnnLWx5Tml62mFk3T1SEEVOKpx+eLCqD3alSBLv/o0vatTx50ALUFRQUqTjKnkCULw7kEGADobEAlo6WFjQAAAABJRU5ErkJggg==') no-repeat 50% 50%;
+        background-size: 15px 15px;
+        width: 20px;
+        height: 20px;
+        pointer-events: none;
+      }
+
+      label {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+        line-height: 20px;
+      }
+
+      .form {
+        border: 1px solid #dadada;
+        padding: 10px;
+        margin: 20px 0;
+        max-width: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@16.8.6/umd/react.production.min.js"></script>
+    <script>
+      window.react = React;
+    </script>
+    <script src="https://unpkg.com/react-dom@16.8.6/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/use-element-fit@0.2.0/dist/index.bundle.js"></script>
+
+    <script type="text/babel" data-presets="es2015,react">
+      const { useElementFit, ScaleMode } = window.useElementFit;
+
+      const ElementFit = ({
+        width,
+        height,
+        scaleMode,
+        alignmentX,
+        alignmentY,
+        maxWidth,
+        maxHeight,
+      }) => {
+        const { ref, width: fitWidth, height: fitHeight, x, y } = useElementFit(
+          width,
+          height,
+          scaleMode,
+          alignmentX,
+          alignmentY,
+          maxWidth,
+          maxHeight,
+        );
+
+        return (
+          <div className="fit-container" ref={ref}>
+            <div
+              className="fit-child"
+              style={{
+                width: `${fitWidth}px`,
+                height: `${fitHeight}px`,
+                top: `${y}px`,
+                left: `${x}px`,
+              }}
+            >
+              <span className="fit-label">
+                size: {fitWidth}x{fitHeight}
+                <br />
+                position: {x}x{y}
+              </span>
+            </div>
+            <div class="handle" />
+          </div>
+        );
+      };
+
+      const App = () => {
+        const [ratioX, setRatioX] = React.useState(200);
+        const [ratioY, setRatioY] = React.useState(100);
+        const [scaleMode, setScaleMode] = React.useState(ScaleMode.COVER);
+        const [alignmentX, setAlignmentX] = React.useState(0.5);
+        const [alignmentY, setAlignmentY] = React.useState(0.5);
+        const [maxWidth, setMaxWidth] = React.useState();
+        const [maxHeight, setMaxHeight] = React.useState();
+
+        const onChange = (onChangeFn, number) => event => {
+          onChangeFn(number ? parseFloat(event.target.value) || 0 : event.target.value);
+        };
+
+        return (
+          <div>
+            <fieldset class="form">
+              <legend>Options</legend>
+              <label>
+                <code>height</code> <input type="text" value={ratioX} onChange={onChange(setRatioX, true)} />
+              </label>
+              <label>
+                <code>width</code> <input type="text" value={ratioY} onChange={onChange(setRatioY, true)} />
+              </label>
+              <label>
+                <code>type</code>
+                <select onChange={onChange(setScaleMode)}>
+                  {Object.values(ScaleMode).map(v => (
+                    <option selected={scaleMode === v}>{v}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                <span><code>alignmentX</code> ({alignmentX})</span>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={alignmentX}
+                  onChange={onChange(setAlignmentX, true)}
+                />
+              </label>
+              <label>
+                <span><code>alignmentY</code> ({alignmentY})</span>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={alignmentY}
+                  onChange={onChange(setAlignmentY, true)}
+                />
+              </label>
+              <label>
+                <code>maxWidth</code> <input type="text" value={maxWidth} onChange={onChange(setMaxWidth, true)} />
+              </label>
+              <label>
+                <code>maxHeight</code> <input type="text" value={maxHeight} onChange={onChange(setMaxHeight, true)} />
+              </label>
+            </fieldset>
+            Click and drag the red cursor to see <code>useElementFit</code> in action
+            <ElementFit
+              width={ratioX}
+              height={ratioY}
+              scaleMode={scaleMode}
+              alignmentX={alignmentX}
+              alignmentY={alignmentY}
+              maxWidth={maxWidth}
+              maxHeight={maxHeight}
+            />
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, document.getElementById('app'));
+    </script>
+  </body>
+</html>
