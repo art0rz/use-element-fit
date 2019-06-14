@@ -4,8 +4,11 @@
 
 `useElementFit` is a React hook that allows you to measure and element's based on certain restraints, similar to `object-fit` in CSS.
 
-# Usage
+# Motivation
+Working with canvas or more complex uses of `object-fit` often makes it useful to calculate the width/height and x/y values of a element or object, this effect helps you do this.
 
+# Usage
+See `useElementFit` in [action](https://art0rz.github.io/use-element-fit/)
 ```js
 import React from 'react';
 import { useElementFit, ScaleMode } from 'use-element-fit';
