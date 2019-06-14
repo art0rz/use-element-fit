@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useResizeObserver from 'use-resize-observer';
 import ScaleMode from './ScaleMode';
 
