@@ -1,7 +1,12 @@
 {
   "name": "use-element-fit",
   "version": "0.3.0",
-  "description": "use-element-fit",
+  "description": "useElementFit is a React hook that allows you to measure and element's based on certain restraints, similar to object-fit in CSS.",
+  "keywords": [
+    "resize-observer",
+    "object-fit",
+    "background-size"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
